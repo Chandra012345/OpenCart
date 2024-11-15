@@ -16,13 +16,13 @@ def setup(browser):
     # driver = webdriver.Chrome(service=serv_obj)
     # return driver
     if browser=='edge':
-        driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
+        driver = webdriver.Edge()
         print("Launching Edge browser..........")
     elif browser=='firefox':
-        driver=webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+        driver=webdriver.Firefox()
         print("Launching Firefox browser.........")
     else:
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        driver = webdriver.Chrome()
         print("Launching Chrome browser..........")
 
     return driver

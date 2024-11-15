@@ -30,7 +30,7 @@ class Test_001_AccountReg:
         self.regpage.setFirstName("Ram")
         self.regpage.setLastName("Chandra")
         self.email=randomstring.random_string_generator()+'@gmail.com'
-        self.regpage.setEmail("Manish")
+        self.regpage.setEmail(self.email)
         self.regpage.setPassword("ramchandra")
 
         self.regpage.checkSubscribe()
