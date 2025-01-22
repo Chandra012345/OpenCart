@@ -1,11 +1,11 @@
 import os.path
+
 import pytest
 from selenium import webdriver
 from datetime import datetime
 
 @pytest.fixture()
 def setup(browser):
-
     if browser=='edge':
         driver = webdriver.Edge()
         print("Launching Edge browser..........")
@@ -17,7 +17,6 @@ def setup(browser):
         print("Launching Chrome browser..........")
 
     return driver
-
 
 def pytest_addoption(parser):
     parser.addoption("--browser")

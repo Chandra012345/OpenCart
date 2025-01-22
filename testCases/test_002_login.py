@@ -40,4 +40,30 @@ class Test_Login:
         self.driver.close()
         self.logger.info("****** End of test_002_login ********")
 
+    def test_login2(self, setup):
+
+        self.logger.info("*******  starting test_002_login ******")
+        self.driver = setup
+        self.driver.get(self.baseURL)
+        self.driver.maximize_window()
+
+        self.hp = HomePage(self.driver)
+        self.hp.clikMyAccount()
+        self.hp.clickLogin()
+
+        self.lp = LoginPage(self.driver)
+        self.lp.setEmail(self.user)
+        self.lp.setPassword(self.pasword)
+        self.lp.clickLogin()
+        self.targetpage = self.lp.getConfirmationMsg()
+        self.time.sleep(5)
+        if self.targetpage == True:
+            assert True
+        else:
+            self.driver.save_screenshot(os.path.abspath(os.curdir) + "\\screenshots\\" + "test_login.png")
+            assert False
+
+        self.driver.close()
+        self.logger.info("****** End of test_002_login ********")
+
 
