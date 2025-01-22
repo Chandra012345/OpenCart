@@ -1,29 +1,33 @@
 import os.path
-
 import pytest
 from selenium import webdriver
 from datetime import datetime
 
-@pytest.fixture()
-def setup(browser):
-    if browser=='edge':
-        driver = webdriver.Edge()
-        print("Launching Edge browser..........")
-    elif browser=='firefox':
-        driver=webdriver.Firefox()
-        print("Launching Firefox browser.........")
-    else:
-        driver = webdriver.Chrome()
-        print("Launching Chrome browser..........")
 
-    return driver
+@pytest.fixture
+def setup(request):
+    browser = request.config.getoption("--browser")  # Get the browser from the command line
+    if browser == "chrome":
+        driver = webdriver.Chrome()
+    elif browser == "firefox":
+        driver = webdriver.Firefox()
+    elif browser == "edge":
+        driver = webdriver.Edge()
+    else:
+        raise ValueError(f"Unsupported browser: {browser}")
+
+    yield driver
+    driver.quit()
 
 def pytest_addoption(parser):
-    parser.addoption("--browser")
+    parser.addoption(
+        "--browser",
+        action="store",
+        default="chrome",  # Default browser
+        help="Browser to run tests: chrome, firefox, edge"
+    )
 
-@pytest.fixture()
-def browser(request):
-    return request.config.getoption("--browser")
+
 
 
 ############# Pytest HTML Report ####################

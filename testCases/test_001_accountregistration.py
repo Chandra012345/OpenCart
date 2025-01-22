@@ -1,3 +1,5 @@
+import pytest
+
 from pageObjects.HomePage import HomePage
 from pageObjects.AccountRegistrationPage import AccountRegistrationPage
 from utilities import randomstring
@@ -11,6 +13,8 @@ class Test_001_AccountReg:
     import time
     base_url=ReadConfig.getApplicationURL()
     logger=LogGen.loggen()
+
+    @pytest.mark.parametrize("setup", ["chrome", "firefox", "edge"], indirect=True)
     def test_account_reg(self,setup):
         self.logger.info("*** test_001_AccountRegistration started ***"
                          "")
