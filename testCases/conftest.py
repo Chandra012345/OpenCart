@@ -1,5 +1,4 @@
 import os.path
-
 import pytest
 from selenium import webdriver
 from datetime import datetime
